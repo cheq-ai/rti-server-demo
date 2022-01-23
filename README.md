@@ -7,19 +7,25 @@ In order to run the demo a `config.js` file will need to be created under root d
 ```javascript
 //config.js
 module.exports = {
-    tagHash : '00000000000000000000000000000000', 
-    decryptionKey : '123456789012345678901234'
+    tagid : 1,
+    apiKey: "abcdddd-dddd3-492f-9417-66a1f22b4daa",
+    cheqsEngineUri: "https://obs.cheqzone.com/v1/realtime-interception"
 }
 ``` 
 
-**tagHash** - a 32 chars hash which can be found under CHEQ's invocation code url.
+**tagid** - a numeric id which can be found under CHEQ's invocation code url.
 
 ```
-https://[domain]/i/[TAG_HASH].js
+https://[domain]/clicktrue_invocation.js?id=[TAG_ID]
 ```
 
-**decryptionKey** - a 24 chars decryption key given by CHEQ.
+**apiKey** - an API token key given by CHEQ.
 
+**cheqsEngineUri** - CHEQ RTI backend server URI.
+
+```
+https://obs.cheqzone.com/v1/realtime-interception
+```
 
 Once config file have been setup properly, simply run the demo by
  

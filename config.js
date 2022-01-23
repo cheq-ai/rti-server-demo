@@ -1,4 +1,5 @@
 module.exports = {
-	tagHash : '0af17501a7712f62012f918b9e10b679',
-	decryptionKey : 'f3717429c398168a7675d727'
+	tagid : 1,
+	apiKey: "abcdddd-dddd3-492f-9417-66a1f22b4daa",
+	cheqsEngineUri: "https://obs.cheqzone.com/v1/realtime-interception"
 }

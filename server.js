@@ -52,7 +52,7 @@ app.get('/', async (req, res) => {
 		// Cookie saved on client side for binding between client detection and server one
 		res.setHeader('Set-Cookie', validResult.setCookie);
 		res.render('index', {
-			tagId: config.tagid,
+			tagHash: config.tagHash,
 			rtiServerResponse: JSON.stringify(validResult)
 		});
 	}

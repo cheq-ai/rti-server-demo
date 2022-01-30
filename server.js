@@ -13,7 +13,7 @@ function validateRequestOnRTIServer(eventType, req) {
 		// This is the body of the request which having some fields that used to tag each request as valid or not:
 		const form = {
 			'ApiKey': config.apiKey,
-			'TagId': config.tagid,
+			'TagHash': config.tagHash,
 			'ClientIP': req.ip,
 			'RequestURL': `${req.protocol}://${req.get('host')}${req.originalUrl}`,
 			'ResourceType': req.headers['content-type'] || req.headers['Content-Type'],
@@ -33,7 +33,12 @@ function validateRequestOnRTIServer(eventType, req) {
 				if (error) {
 					return reject(error);
 				}
-				resolve(JSON.parse(response.body));
+				try {
+					resolve(JSON.parse(response.body));
+				} catch (err) {
+					console.error(err);
+					resolve();
+				}
 			});
 	});
 }
@@ -41,7 +46,7 @@ function validateRequestOnRTIServer(eventType, req) {
 app.set('view engine', 'ejs');
 app.get('/', async (req, res) => {
 	const validResult = await validateRequestOnRTIServer("page_load", req);
-	if (validResult.isInvalid) {
+	if (!validResult || validResult.isInvalid) {
 		res.status(403).send("Visitor is invalid, session blocked!");
 	} else {
 		// Cookie saved on client side for binding between client detection and server one
